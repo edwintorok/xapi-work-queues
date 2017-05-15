@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: a37bb1415e4f5c8e1958c8f98b8c9b21)
+version = "0.1.0"
+description = "XAPI work queues"
+requires = "threads xcp stdext oUnit"
+archive(byte) = "xapi_work_queues.cma"
+archive(byte, plugin) = "xapi_work_queues.cma"
+archive(native) = "xapi_work_queues.cmxa"
+archive(native, plugin) = "xapi_work_queues.cmxs"
+exists_if = "xapi_work_queues.cma"
+# OASIS_STOP
+

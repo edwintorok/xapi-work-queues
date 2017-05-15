@@ -1,0 +1,40 @@
+OASISFormat: 0.4
+Name:        xapi-work-queues
+Version:     0.1.0
+Synopsis:    XAPI work queues
+Authors:     Xapi Project
+License:     LGPL-2.1 with OCaml linking exception
+Plugins:     META (0.4), DevFiles(0.4)
+AlphaFeatures: compiled_setup_ml, ocamlbuild_more_args
+OCamlVersion: >= 4.02.3
+BuildTools:  ocamlbuild
+XOCamlbuildPluginTags:  package(bisect_ppx.ocamlbuild)
+
+Homepage: https://github.com/xapi-project/xapi-work-queues
+Authors: "xen-api@lists.xen.org"
+Maintainers: "xen-api@lists.xen.org"
+Description: Work queues shared between multiple xapi projects
+
+Library xapi_work_queues
+  CompiledObject: best
+  Path: lib/
+  Install: true
+  Modules: Xapi_work_queues
+  BuildDepends: threads, xcp, stdext, oUnit (>= 2.0.0)
+
+Executable xwq_test
+  Build$:             flag(tests)
+  CompiledObject:     best
+  Path:               test
+  MainIs:             xwq_test.ml
+  Install:            false
+  BuildDepends:       oUnit (>= 2.0.0), xapi_work_queues
+
+Test xwq_test
+  Run$:               flag(tests)
+  Command:            $xwq_test -verbose true
+  WorkingDirectory:   .
+
+SourceRepository opam-pin
+  Type: git
+  Location: https://github.com/xapi-project/xapi-work-queues.git

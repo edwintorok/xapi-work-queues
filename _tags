@@ -1,0 +1,36 @@
+# OASIS_START
+# DO NOT EDIT (digest: 3c0d7842d260df559521922bed8169eb)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library xapi_work_queues
+"lib/xapi_work_queues.cmxs": use_xapi_work_queues
+<lib/*.ml{,i,y}>: package(oUnit)
+<lib/*.ml{,i,y}>: package(stdext)
+<lib/*.ml{,i,y}>: package(threads)
+<lib/*.ml{,i,y}>: package(xcp)
+# Executable xwq_test
+<test/xwq_test.{native,byte}>: package(oUnit)
+<test/xwq_test.{native,byte}>: package(stdext)
+<test/xwq_test.{native,byte}>: package(threads)
+<test/xwq_test.{native,byte}>: package(xcp)
+<test/xwq_test.{native,byte}>: use_xapi_work_queues
+<test/*.ml{,i,y}>: package(oUnit)
+<test/*.ml{,i,y}>: package(stdext)
+<test/*.ml{,i,y}>: package(threads)
+<test/*.ml{,i,y}>: package(xcp)
+<test/*.ml{,i,y}>: use_xapi_work_queues
+# OASIS_STOP
+<lib/*>: coverage
+<test/*.{byte,native}>: coverage

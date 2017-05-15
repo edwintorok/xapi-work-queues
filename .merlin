@@ -1,0 +1,3 @@
+PKG threads threads.posix xcp stdext oUnit
+S lib
+B _build/lib
