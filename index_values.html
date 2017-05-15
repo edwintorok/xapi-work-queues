@@ -1,0 +1,79 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Xapi_work_queues" rel="Chapter" href="Xapi_work_queues.html"><title>Index of values</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;</div>
+<h1>Index of values</h1>
+<table>
+<tr><td align="left"><br>C</td></tr>
+<tr><td><a href="Xapi_work_queues.S.html#VALcreate">create</a> [<a href="Xapi_work_queues.S.html">Xapi_work_queues.S</a>]</td>
+<td><div class="info">
+<code class="code">create&nbsp;n</code> create a worker pool with <code class="code">n</code> initial workers.
+</div>
+</td></tr>
+<tr><td align="left"><br>D</td></tr>
+<tr><td><a href="Xapi_work_queues.S.html#VALdump">dump</a> [<a href="Xapi_work_queues.S.html">Xapi_work_queues.S</a>]</td>
+<td><div class="info">
+<code class="code">dump&nbsp;pool</code> dumps diagnostic information about the pool
+</div>
+</td></tr>
+<tr><td><a href="Xapi_work_queues.Item.html#VALdump_item">dump_item</a> [<a href="Xapi_work_queues.Item.html">Xapi_work_queues.Item</a>]</td>
+<td><div class="info">
+<code class="code">dump_item&nbsp;item</code> returns a short description of the operation
+      for debugging purposes
+</div>
+</td></tr>
+<tr><td><a href="Xapi_work_queues.Item.html#VALdump_task">dump_task</a> [<a href="Xapi_work_queues.Item.html">Xapi_work_queues.Item</a>]</td>
+<td><div class="info">
+<code class="code">dump_task&nbsp;t</code> dumps information about the task to execute, other than
+      the operation defined above
+</div>
+</td></tr>
+<tr><td align="left"><br>E</td></tr>
+<tr><td><a href="Xapi_work_queues.Item.html#VALexecute">execute</a> [<a href="Xapi_work_queues.Item.html">Xapi_work_queues.Item</a>]</td>
+<td><div class="info">
+<code class="code">execute&nbsp;item</code> gets called to run the work item.
+</div>
+</td></tr>
+<tr><td align="left"><br>F</td></tr>
+<tr><td><a href="Xapi_work_queues.Item.html#VALfinally">finally</a> [<a href="Xapi_work_queues.Item.html">Xapi_work_queues.Item</a>]</td>
+<td><div class="info">
+<code class="code">finally&nbsp;item</code> gets called when executing the work item has finished,
+      regardless whether it raised an exception or not.
+</div>
+</td></tr>
+<tr><td align="left"><br>P</td></tr>
+<tr><td><a href="Xapi_work_queues.S.html#VALpush">push</a> [<a href="Xapi_work_queues.S.html">Xapi_work_queues.S</a>]</td>
+<td><div class="info">
+<code class="code">push&nbsp;pool&nbsp;tag&nbsp;item</code> pushes <code class="code">item</code> at the end of queue for <code class="code">pool</code>.
+</div>
+</td></tr>
+<tr><td align="left"><br>S</td></tr>
+<tr><td><a href="Xapi_work_queues.S.html#VALset_size">set_size</a> [<a href="Xapi_work_queues.S.html">Xapi_work_queues.S</a>]</td>
+<td><div class="info">
+<code class="code">set_size&nbsp;pool&nbsp;n</code> sets the worker <code class="code">pool</code> size to <code class="code">n</code>.
+</div>
+</td></tr>
+<tr><td><a href="Xapi_work_queues.Item.html#VALshould_keep">should_keep</a> [<a href="Xapi_work_queues.Item.html">Xapi_work_queues.Item</a>]</td>
+<td><div class="info">
+<code class="code">should_keep&nbsp;current&nbsp;previous</code>
+      Determines whether the current work item should be retained
+      knowing that the <code class="code">previous</code> items in the queue exist.
+</div>
+</td></tr>
+<tr><td align="left"><br>T</td></tr>
+<tr><td><a href="Xapi_work_queues.html#VALtests">tests</a> [<a href="Xapi_work_queues.html">Xapi_work_queues</a>]</td>
+<td></td></tr>
+</table>
+</body>
+</html>

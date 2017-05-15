@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="Start" href="index.html">
+<link rel="next" href="Xapi_work_queues.S.html">
+<link rel="Up" href="Xapi_work_queues.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Xapi_work_queues" rel="Chapter" href="Xapi_work_queues.html"><title>Xapi_work_queues.Item</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Xapi_work_queues.html" title="Xapi_work_queues">Up</a>
+&nbsp;<a class="post" href="Xapi_work_queues.S.html" title="Xapi_work_queues.S">Next</a>
+</div>
+<h1>Module type <a href="type_Xapi_work_queues.Item.html">Xapi_work_queues.Item</a></h1>
+
+<pre><span class="keyword">module type</span> Item = <code class="code"><span class="keyword">sig</span></code> <a href="Xapi_work_queues.Item.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info modtype top">
+A work item submitted to a worker pool<br>
+</div>
+<hr width="100%">
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+<div class="info ">
+work item<br>
+</div>
+
+
+<pre><span id="VALdump_item"><span class="keyword">val</span> dump_item</span> : <code class="type"><a href="Xapi_work_queues.Item.html#TYPEt">t</a> -> Rpc.t</code></pre><div class="info ">
+<code class="code">dump_item&nbsp;item</code> returns a short description of the operation
+      for debugging purposes<br>
+</div>
+
+<pre><span id="VALdump_task"><span class="keyword">val</span> dump_task</span> : <code class="type"><a href="Xapi_work_queues.Item.html#TYPEt">t</a> -> Rpc.t</code></pre><div class="info ">
+<code class="code">dump_task&nbsp;t</code> dumps information about the task to execute, other than
+      the operation defined above<br>
+</div>
+
+<pre><span id="VALexecute"><span class="keyword">val</span> execute</span> : <code class="type"><a href="Xapi_work_queues.Item.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<code class="code">execute&nbsp;item</code> gets called to run the work item.
+      Exceptions raised by <code class="code">execute</code> get logged and ignored.
+      Calls to <code class="code">execute</code> with the same tag are serialised.<br>
+</div>
+
+<pre><span id="VALfinally"><span class="keyword">val</span> finally</span> : <code class="type"><a href="Xapi_work_queues.Item.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<code class="code">finally&nbsp;item</code> gets called when executing the work item has finished,
+      regardless whether it raised an exception or not.
+      Exceptions raised by <code class="code">finally</code> get logged and ignored.
+      Note that calls to <code class="code">finally</code> are not serialised!<br>
+</div>
+
+<pre><span id="VALshould_keep"><span class="keyword">val</span> should_keep</span> : <code class="type"><a href="Xapi_work_queues.Item.html#TYPEt">t</a> -> <a href="Xapi_work_queues.Item.html#TYPEt">t</a> list -> bool</code></pre><div class="info ">
+<code class="code">should_keep&nbsp;current&nbsp;previous</code>
+      Determines whether the current work item should be retained
+      knowing that the <code class="code">previous</code> items in the queue exist.<br>
+</div>
+</body></html>

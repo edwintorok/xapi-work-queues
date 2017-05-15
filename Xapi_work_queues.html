@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="Start" href="index.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Xapi_work_queues" rel="Chapter" href="Xapi_work_queues.html"><title>Xapi_work_queues</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;</div>
+<h1>Module <a href="type_Xapi_work_queues.html">Xapi_work_queues</a></h1>
+
+<pre><span class="keyword">module</span> Xapi_work_queues: <code class="code"><span class="keyword">sig</span></code> <a href="Xapi_work_queues.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info module top">
+Work queues
+    <em>0.1.0 - <a href="https://github.com/xapi-project/xapi-work-queues">homepage</a></em> 
+<p>
+
+    Consult the <a href="Xapi_work_queues.S.html">module documentation</a>.
+<p>
+
+    <h1 id="1_Workerpoolscheduling">Worker pool scheduling</h1>
+<p>
+
+    A worker pool has a limited number of worker threads.
+    Each worker pops one tagged item from the queue in a round-robin fashion.
+    While the item is executed the tag temporarily doesn't participate in round-robin scheduling.
+    If during execution more items get queued with the same tag they get redirected to a private queue.
+    Once the item finishes execution the tag will participate in RR scheduling again.
+<p>
+
+    This ensures that items with the same tag do not get executed in parallel,
+    and that a tag with a lot of items does not starve the execution of other tags.
+<p>
+
+    <h1 id="1_Exampleusage">Example usage</h1>
+<p>
+
+    <pre class="codepre"><code class="code">      <span class="keyword">module</span> <span class="constructor">Operation</span> = <span class="keyword">struct</span>
+        <span class="keyword">type</span> t = string
+        <span class="keyword">let</span> rpc_of_t = <span class="constructor">Rpc</span>.rpc_of_string
+                
+        <span class="keyword">let</span> execute op = print_endline op
+      <span class="keyword">end</span>
+
+      <span class="keyword">module</span> <span class="constructor">WorkerPool</span> = <span class="constructor">Xapi_work_queues</span>.<span class="constructor">Make</span>(<span class="keyword">struct</span>
+          <span class="keyword">type</span> task = <span class="constructor">Operation</span>.t <span class="keywordsign">-&gt;</span> unit
+          <span class="keyword">type</span> t = <span class="constructor">Operation</span>.t * task
+
+          <span class="keyword">let</span> dump_item (op, _) = <span class="constructor">Rpc</span>.rpc_of_string op
+          <span class="keyword">let</span> dump_task _ = <span class="constructor">Rpc</span>.rpc_of_unit ()
+
+          <span class="keyword">let</span> execute (op, f) = f op
+
+          <span class="keyword">let</span> finally _ = ()
+          <span class="keyword">let</span> should_keep _ _ = <span class="keyword">true</span>
+        <span class="keyword">end</span>)
+
+
+      <span class="keyword">let</span> () =
+        <span class="keyword">let</span> pool = <span class="constructor">WorkerPool</span>.create 25 <span class="keyword">in</span>
+        <span class="constructor">WorkerPool</span>.push pool <span class="string">"tag1"</span> (<span class="constructor">Start</span>, <span class="constructor">Operation</span>.execute);
+        <span class="constructor">WorkerPool</span>.push pool <span class="string">"tag2"</span> (<span class="constructor">Start</span>, <span class="constructor">Operation</span>.execute);
+        <span class="constructor">WorkerPool</span>.push pool <span class="string">"tag2"</span> (<span class="constructor">Stop</span>, <span class="constructor">Operation</span>.execute);
+        <span class="constructor">WorkerPool</span>.push pool <span class="string">"tag1"</span> (<span class="constructor">Stop</span>, <span class="constructor">Operation</span>.execute);
+        ...
+    </code></pre><br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">module type</span> <a href="Xapi_work_queues.Item.html">Item</a> = <code class="code"><span class="keyword">sig</span></code> <a href="Xapi_work_queues.Item.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info">
+A work item submitted to a worker pool
+</div>
+
+<pre><span class="keyword">module type</span> <a href="Xapi_work_queues.S.html">S</a> = <code class="code"><span class="keyword">sig</span></code> <a href="Xapi_work_queues.S.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>
+<pre><span class="keyword">module</span> <a href="Xapi_work_queues.Make.html">Make</a> <code class="code">(</code><code class="code"><span class="constructor">I</span></code><code class="code">&nbsp;:&nbsp;</code><code class="type"><a href="Xapi_work_queues.Item.html">Item</a></code><code class="code">)&nbsp;</code>: <code class="type"><a href="Xapi_work_queues.S.html">S</a></code><code class="type">  with type item = I.t</code></pre>
+<pre><span id="VALtests"><span class="keyword">val</span> tests</span> : <code class="type">OUnit2.test list</code></pre></body></html>
